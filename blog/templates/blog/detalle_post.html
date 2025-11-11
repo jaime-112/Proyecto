@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block titulo %} Detalle entrada: {{entrada.titulo}} {% endblock %}
+
+{%block contenido%}
+
+    <h1>{{entrada.titulo}}</h1>
+    {{entrada.autor}}
+    {{entrada.cuerpo}}
+
+
+{%endblock%}

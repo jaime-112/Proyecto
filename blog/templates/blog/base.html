@@ -1,0 +1,25 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Mi primera web</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+
+<body>
+
+    <nav class="nav">
+      <ul class="nav-links">
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        <li><a href="{% url 'autores' %}">autores</a></li>
+      </ul>
+    </nav>
+    
+    <div class="cont">
+    <h1>{% block titulo %}{% endblock %}</h1>
+    
+    {% block contenido %}{%endblock%}
+    </div>
+</body>
+</html>

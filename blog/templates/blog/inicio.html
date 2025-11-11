@@ -1,1 +1,21 @@
-Hola caracola
+{% extends 'blog/base.html' %}
+
+
+{% block titulo %} Listado entradas: {% endblock %}
+
+{%block contenido%} 
+<ul>
+        {%for i in entradas%}
+            <li><a href="{% url 'detalle_post' pk=i.pk%}">{{i}}</a></li>
+        {%endfor%}           
+
+        <h2>Listado Autores</h2>
+
+        {%for i in autores%}
+            <li><a href="{% url 'autor_post' pk=i.pk%}">{{i.nombre}}</a></li>
+        {%endfor%}    
+
+        <h2><li><a href="{% url 'autores' %}">Listado de autores</a></li></h2>
+    </ul>
+
+{%endblock%} 
