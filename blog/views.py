@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post,Autor
+from .forms import Autorform
 
 # Create your views here.
 def inicio(request):
@@ -28,6 +29,18 @@ def autores(request):
     return render(request, 'blog/autores.html', contexto )
 
 
+def autor_nuevo(request):
+    if request.method == 'POST':
+        form = Autorform(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            edad = form.cleaned_data['edad']
+            Autor.objects.create(nombre=nombre,apellido=apellido,edad=edad)
+            return redirect('autores')
+    else:
+        form = Autorform()
+    return render(request,'blog/autor_nuevo.html', {'form': form} )
 
 # Post.objects.all()
 # Post.objects.filter(titulo__endswith = 'a')

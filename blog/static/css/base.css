@@ -28,3 +28,22 @@
     .nav-links a:hover {
       color: #00bcd4;
     }
+.boton {
+  background-color: #ff4b2b; /* Color principal */
+  color: white; /* Texto blanco */
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.boton:hover {
+  background-color: #ffffff; /* Más oscuro al pasar el ratón */
+  color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
