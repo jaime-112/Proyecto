@@ -12,7 +12,6 @@ class Post(models.Model):
 #Se puede utilizar on delete=models.cascada y ...
 
 
-
     def __str__(self):
         return f'autor: ({self.autor}) titulo: {self.titulo}'
     

@@ -1,16 +1,25 @@
 {% extends 'blog/base.html' %}
 
+{% block contenido %} 
 
-{% block titulo %} Nuevo Autor {% endblock %}
+{% if estado == 'editando' %}
+<h1> Editar Autor </h1>
 
-{%block contenido%} 
+{% elif estado == 'Borrando'%}
+<h1> Borrando Autor</h1>
+
+{% else %}
+
+<h1> Crear Autor </h1>
+
+{% endif %}
+
 
 <form action="" method="post">
-    {%csrf_token%}
+    {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Enviar">
 
 </form>
-
-{%endblock%} 
+{% endblock %} 
 

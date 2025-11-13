@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post,Autor
 from .forms import Autorform
+from .forms import AutorModelform
 
 # Create your views here.
 def inicio(request):
@@ -29,21 +30,49 @@ def autores(request):
     return render(request, 'blog/autores.html', contexto )
 
 
-def autor_nuevo(request):
+def autor_editar(request, pk):
+    autor = get_object_or_404(Autor,pk=pk)
+
     if request.method == 'POST':
-        form = Autorform(request.POST)
+        form = AutorModelform(request.POST,instance=autor)
         if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            apellido = form.cleaned_data['apellido']
-            edad = form.cleaned_data['edad']
-            Autor.objects.create(nombre=nombre,apellido=apellido,edad=edad)
+            form.save()
             return redirect('autores')
     else:
-        form = Autorform()
-    return render(request,'blog/autor_nuevo.html', {'form': form} )
+        form = AutorModelform(instance=autor)
+        estado = 'editando'
+    contexto = {'form': form, 'estado': estado}
+    return render(request, 'blog/autor_nuevo.html', contexto)
 
-# Post.objects.all()
-# Post.objects.filter(titulo__endswith = 'a')
-# Post.objects.filter(titulo__startswith = 'M')
-# Post.objects.order_by('titulo')
-# Post.objects.order_by('titulo').reverse()
+
+
+
+
+def autor_nuevo(request):
+    if request.method == 'POST':
+        form = AutorModelform(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('autores')
+    else:
+        form = AutorModelform()
+        estado = 'creando'
+    contexto = {'form': form, 'estado': estado}
+    return render(request, 'blog/autor_nuevo.html', contexto)
+
+
+
+def autor_borrar(request, pk):
+    autor = get_object_or_404(Autor,pk=pk)
+
+    if request.method == 'POST':
+        form = AutorModelform(request.POST,instance=autor)
+        if form.is_valid():
+            autor.delete()
+            return redirect('autores')
+    else:
+        form = AutorModelform(instance=autor)
+        estado = 'Borrando'
+    contexto = {'form': form, 'estado': estado}
+    return render(request, 'blog/autor_nuevo.html', contexto)
+

@@ -3,11 +3,26 @@
 {% block titulo %} Autores: {% endblock %}
 
 {%block contenido%}
+
+<style>
+    .boton{
+        margin-left: 10px;
+        background-color: lightblue;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+    }
+</style>
     <ul>
 
         {%for i in entradita%}
             <li><a href="{% url 'autor_post' pk=i.pk%}">{{i.nombre}}</a></li>
+            <button class="boton"><a href="{% url 'autor_editar' pk=i.pk%}">Editar</a></button>
+            <button class="boton"><a href="{% url 'autor_borrar' pk=i.pk%}">Borrar</a></button>
         {%endfor%}
     </ul>
+
+    <a href="{%url 'autor_nuevo'%}" class="boton">Crear autor</a>
+
 
 {%endblock%}
